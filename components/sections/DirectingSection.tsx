@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Award, BarChart3, CalendarDays, GitMerge, MessagesSquare } from "lucide-react";
 import { useState } from "react";
 import { directing } from "@/lib/content";
+import { easeOut } from "@/lib/motion";
 import { Reveal } from "@/components/shell/Reveal";
 import { SectionHeading } from "@/components/shell/SectionHeading";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,7 @@ export function DirectingSection() {
                   aria-pressed={activeIndex === index}
                   aria-label={`${step.letter} — ${step.title}`}
                   className={cn(
-                    "flex aspect-square items-center justify-center rounded-xl border font-display text-2xl font-bold transition-all duration-300 sm:text-4xl",
+                    "flex aspect-square items-center justify-center rounded-xl border font-display text-2xl font-bold transition-[transform,background-color,border-color,color,box-shadow] duration-300 active:scale-95 active:duration-100 sm:text-4xl",
                     activeIndex === index
                       ? "border-byd-red bg-byd-red text-white glow-red"
                       : "border-white/15 bg-white/[0.03] text-white/35 hover:border-byd-red/50 hover:text-white/70",
@@ -70,7 +71,7 @@ export function DirectingSection() {
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reduce ? undefined : { opacity: 0, y: -10 }}
-              transition={{ duration: reduce ? 0 : 0.3 }}
+              transition={{ duration: reduce ? 0 : 0.3, ease: easeOut }}
               className="panel grid gap-8 p-7 sm:p-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14"
             >
               <div className="flex items-start gap-5">

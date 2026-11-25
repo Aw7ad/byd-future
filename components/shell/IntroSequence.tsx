@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import { easeOut } from "@/lib/motion";
 import { useReducedMotionPreference } from "./useReducedMotionPreference";
 
 type Phase = "idle" | "visible" | "gone";
@@ -65,7 +66,7 @@ export function IntroSequence() {
           onClick={finish}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.75, ease: "easeInOut" }}
+          transition={{ duration: 0.6, ease: easeOut }}
           className="fixed inset-0 z-[90] flex cursor-pointer flex-col items-center justify-center overflow-hidden bg-black px-6 text-center"
         >
           <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -103,7 +104,7 @@ export function IntroSequence() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.15, duration: 0.9, ease: easeOut }}
           >
             <Image
               src="/images/byd-logo.svg"
@@ -128,7 +129,7 @@ export function IntroSequence() {
           <motion.h1
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.7, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 1.7, duration: 0.9, ease: easeOut }}
             className="display text-glow-red mt-5 max-w-4xl text-[clamp(1.8rem,5.5vw,4.2rem)]"
           >
             BYD — Building the future of mobility

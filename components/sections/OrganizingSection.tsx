@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AlertTriangle, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { organizing } from "@/lib/content";
+import { easeInOut } from "@/lib/motion";
 import { Reveal } from "@/components/shell/Reveal";
 import { SectionHeading } from "@/components/shell/SectionHeading";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,7 @@ export function OrganizingSection() {
                 initial={reduce ? false : { pathLength: 0, opacity: 0.3 }}
                 whileInView={{ pathLength: 1, opacity: 0.95 }}
                 viewport={{ once: true }}
-                transition={{ duration: reduce ? 0 : 1.1, ease: "easeInOut" }}
+                transition={{ duration: reduce ? 0 : 1.1, ease: easeInOut }}
               />
             </svg>
           </div>
@@ -66,7 +67,7 @@ export function OrganizingSection() {
                     aria-pressed={active}
                     onClick={() => setSelectedId(department.id)}
                     className={cn(
-                      "card-interactive panel-light flex h-full w-full flex-col justify-between gap-4 p-5",
+                      "card-interactive panel-light flex h-full w-full flex-col justify-between gap-4 p-5 active:scale-[0.98]",
                       active && "border-byd-red/60 bg-[linear-gradient(150deg,rgba(230,0,18,0.07),#fff)]",
                     )}
                   >

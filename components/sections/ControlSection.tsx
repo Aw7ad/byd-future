@@ -13,6 +13,7 @@ import {
   YAxis,
 } from "recharts";
 import { control } from "@/lib/content";
+import { easeOut } from "@/lib/motion";
 import { Reveal } from "@/components/shell/Reveal";
 import { SectionHeading } from "@/components/shell/SectionHeading";
 import { useReducedMotionPreference } from "@/components/shell/useReducedMotionPreference";
@@ -118,11 +119,11 @@ export function ControlSection() {
                         className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/10"
                       >
                         <motion.div
-                          className="h-full rounded-full bg-byd-red"
-                          initial={reduce ? false : { width: 0 }}
-                          whileInView={{ width: `${percentage}%` }}
+                          className="h-full w-full origin-left rounded-full bg-byd-red"
+                          initial={reduce ? false : { scaleX: 0 }}
+                          whileInView={{ scaleX: percentage / 100 }}
                           viewport={{ once: true }}
-                          transition={{ duration: reduce ? 0 : 1, delay: index * 0.04, ease: "easeOut" }}
+                          transition={{ duration: reduce ? 0 : 1, delay: index * 0.04, ease: easeOut }}
                         />
                       </div>
                       <p className="mt-2 text-[10px] uppercase tracking-[0.12em] text-[#111318]/40">

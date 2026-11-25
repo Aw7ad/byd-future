@@ -66,7 +66,7 @@ export function HomeSection() {
           <Reveal delay={0.36}>
             <button type="button" onClick={() => goTo("project")} className="btn-primary mt-10">
               {hero.ctaLabel}
-              <ArrowDown size={15} />
+              <ArrowDown size={15} className="cta-arrow" />
             </button>
           </Reveal>
         </div>

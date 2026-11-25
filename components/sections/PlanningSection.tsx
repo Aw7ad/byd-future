@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Crosshair } from "lucide-react";
 import { planning } from "@/lib/content";
+import { easeOut } from "@/lib/motion";
 import { Reveal } from "@/components/shell/Reveal";
 import { SectionHeading } from "@/components/shell/SectionHeading";
 import { cn } from "@/lib/utils";
@@ -106,7 +107,7 @@ export function PlanningSection() {
                 initial={reduce ? false : { scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.9, ease: "easeOut" }}
+                transition={{ duration: 0.9, ease: easeOut }}
               />
             </div>
             <div aria-hidden className="absolute left-[9%] right-[9%] top-[11px] hidden h-px bg-white/15 md:block">
@@ -116,7 +117,7 @@ export function PlanningSection() {
                 initial={reduce ? false : { scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.9, ease: "easeOut" }}
+                transition={{ duration: 0.9, ease: easeOut }}
               />
             </div>
 

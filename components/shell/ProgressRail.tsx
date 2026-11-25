@@ -19,13 +19,15 @@ export function ProgressRail() {
               type="button"
               onClick={() => goTo(section.id)}
               aria-label={`Go to ${section.label}`}
-              className="group flex items-center gap-3"
+              className="group flex items-center gap-3 transition-transform duration-200 active:scale-95 active:duration-100"
             >
               <span
+                aria-hidden
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  active ? "w-8 bg-byd-red" : index < activeIndex ? "w-5 bg-white/45" : "w-1.5 bg-white/25",
+                  "rail-dot block h-1.5 w-8 origin-left rounded-full",
+                  active ? "bg-byd-red" : index < activeIndex ? "bg-white/45" : "bg-white/25",
                 )}
+                style={{ transform: `scaleX(${active ? 1 : index < activeIndex ? 0.625 : 0.1875})` }}
               />
               <span
                 className={cn(

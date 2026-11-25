@@ -38,7 +38,7 @@ export function SlideControls() {
         onClick={() => previous && goTo(previous.id)}
         disabled={!previous}
         aria-label={previous ? `Previous section: ${previous.label}` : "No previous section"}
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition hover:border-byd-red hover:bg-byd-red disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-white/15 disabled:hover:bg-black/65"
+        className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition hover:border-byd-red hover:bg-byd-red active:scale-90 active:duration-100 disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-white/15 disabled:hover:bg-black/65 disabled:active:scale-100"
       >
         <ArrowLeft size={17} />
       </button>
@@ -50,7 +50,7 @@ export function SlideControls() {
         onClick={() => next && goTo(next.id)}
         disabled={!next}
         aria-label={next ? `Next section: ${next.label}` : "No next section"}
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition hover:border-byd-red hover:bg-byd-red disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-white/15 disabled:hover:bg-black/65"
+        className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/65 text-white backdrop-blur-md transition hover:border-byd-red hover:bg-byd-red active:scale-90 active:duration-100 disabled:cursor-not-allowed disabled:opacity-25 disabled:hover:border-white/15 disabled:hover:bg-black/65 disabled:active:scale-100"
       >
         <ArrowRight size={17} />
       </button>

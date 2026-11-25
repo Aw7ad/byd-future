@@ -4,6 +4,9 @@
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --color-byd: #e60012;
+  /* Components use the `byd-red` utilities — declare the matching token. */
+  --color-byd-red: #e60012;
+  --color-byd-red-deep: #a8000d;
   --color-ink: #050608;
   --color-panel: #0e1013;
 }
@@ -18,6 +21,12 @@
   --line-light: rgba(10, 12, 16, 0.12);
   --muted-dark: rgba(255, 255, 255, 0.62);
   --muted-light: rgba(17, 19, 24, 0.66);
+
+  /* Motion tokens — mirrored in lib/motion.ts for JS-driven animation. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-press: 100ms;
+  --duration-ui: 240ms;
 }
 
 html {
@@ -168,13 +177,30 @@ body {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   box-shadow: 0 16px 44px -18px rgba(230, 0, 18, 0.85);
-  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    box-shadow var(--duration-ui) var(--ease-out),
+    background var(--duration-ui) ease;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  background: #ff1224;
-  box-shadow: 0 20px 52px -18px rgba(230, 0, 18, 0.95);
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.cta-arrow {
+  transition: transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    background: #ff1224;
+    box-shadow: 0 20px 52px -18px rgba(230, 0, 18, 0.95);
+  }
+
+  .btn-primary:hover .cta-arrow {
+    transform: translateY(3px);
+  }
 }
 
 .btn-ghost {
@@ -190,7 +216,15 @@ body {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    border-color var(--duration-ui) ease,
+    color var(--duration-ui) ease,
+    background var(--duration-ui) ease;
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
 }
 
 .btn-ghost:hover {
@@ -225,12 +259,28 @@ body {
 
 .card-interactive {
   text-align: left;
-  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    border-color var(--duration-ui) ease,
+    box-shadow var(--duration-ui) ease;
 }
 
-.card-interactive:hover {
-  transform: translateY(-4px);
-  border-color: rgba(230, 0, 18, 0.5);
+.card-interactive:active {
+  transform: scale(0.99);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive:hover {
+    transform: translateY(-4px);
+    border-color: rgba(230, 0, 18, 0.5);
+  }
+}
+
+/* Scroll rail dots animate transform/color, never width. */
+.rail-dot {
+  transition:
+    transform var(--duration-ui) var(--ease-out),
+    background-color var(--duration-ui) ease;
 }
 
 /* ---------- Intro motion ---------- */

@@ -5,6 +5,7 @@ import { ActiveSectionProvider } from "@/components/shell/ActiveSectionProvider"
 import { IntroSequence } from "@/components/shell/IntroSequence";
 import { Navbar } from "@/components/shell/Navbar";
 import { ProgressRail } from "@/components/shell/ProgressRail";
+import { ScrollProgress } from "@/components/shell/ScrollProgress";
 import { SlideControls } from "@/components/shell/SlideControls";
 import { MotionProvider } from "@/components/shell/MotionProvider";
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Skip to content
             </a>
             <IntroSequence />
+            <ScrollProgress />
             <Navbar />
             <ProgressRail />
             {children}

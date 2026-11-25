@@ -1,25 +1,37 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUp } from "lucide-react";
+import { useRef } from "react";
 import { conclusion, sections } from "@/lib/content";
 import { Reveal } from "@/components/shell/Reveal";
 import { Sources } from "@/components/shell/Sources";
 import { useActiveSection } from "@/components/shell/ActiveSectionProvider";
+import { useReducedMotionPreference } from "@/components/shell/useReducedMotionPreference";
 
 export function ConclusionSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotionPreference();
   const { goTo } = useActiveSection();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 
   return (
-    <section id="conclusion" className="section section-dark overflow-hidden">
+    <section id="conclusion" ref={sectionRef} className="section section-dark overflow-hidden">
       <div className="relative flex min-h-[92svh] items-center py-28">
-        <Image
-          src="/images/closing-atto3.jpg"
-          alt={conclusion.imageAlt}
-          fill
-          sizes="100vw"
-          className="object-cover object-[60%_center] opacity-40"
-        />
+        <motion.div className="absolute inset-x-0 -inset-y-[10%]" style={reduce ? undefined : { y: imageY }}>
+          <Image
+            src="/images/closing-atto3.jpg"
+            alt={conclusion.imageAlt}
+            fill
+            sizes="100vw"
+            className="object-cover object-[60%_center] opacity-40"
+          />
+        </motion.div>
         <div
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,8,0.92)_0%,rgba(5,6,8,0.72)_45%,rgba(5,6,8,0.97)_100%)]"

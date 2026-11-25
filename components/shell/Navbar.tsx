@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { sections } from "@/lib/content";
+import { duration, easeOut } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { useActiveSection } from "./ActiveSectionProvider";
+import { useReducedMotionPreference } from "./useReducedMotionPreference";
 
 export function Navbar() {
   const { activeId, goTo } = useActiveSection();
+  const reduce = useReducedMotionPreference();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -93,34 +97,41 @@ export function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close navigation" : "Open navigation"}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-transform duration-200 active:scale-95 active:duration-100 lg:hidden"
         >
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
-      {open && (
-        <nav
-          id="mobile-menu"
-          aria-label="Presentation sections (mobile)"
-          className="border-t border-white/10 bg-[#050608]/95 px-4 pb-5 pt-3 lg:hidden"
-        >
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              type="button"
-              onClick={() => navigate(section.id)}
-              className={cn(
-                "flex w-full items-center gap-3 border-b border-white/5 py-3 text-left text-xs font-bold uppercase tracking-[0.16em]",
-                activeId === section.id ? "text-byd-red" : "text-white/70",
-              )}
-            >
-              <span className="text-[10px] text-white/35">{section.number}</span>
-              {section.label}
-            </button>
-          ))}
-        </nav>
-      )}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.nav
+            id="mobile-menu"
+            key="mobile-menu"
+            aria-label="Presentation sections (mobile)"
+            initial={reduce ? false : { opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: reduce ? 0 : duration.ui, ease: easeOut }}
+            className="border-t border-white/10 bg-[#050608]/95 px-4 pb-5 pt-3 lg:hidden"
+          >
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => navigate(section.id)}
+                className={cn(
+                  "flex w-full items-center gap-3 border-b border-white/5 py-3 text-left text-xs font-bold uppercase tracking-[0.16em]",
+                  activeId === section.id ? "text-byd-red" : "text-white/70",
+                )}
+              >
+                <span className="text-[10px] text-white/35">{section.number}</span>
+                {section.label}
+              </button>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

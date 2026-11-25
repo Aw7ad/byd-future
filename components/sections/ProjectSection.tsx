@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, Cpu, Factory, Minus, Plus, Users, Wallet } from "lucide-react";
 import { useState } from "react";
 import { project } from "@/lib/content";
+import { easeOut } from "@/lib/motion";
 import { Reveal } from "@/components/shell/Reveal";
 import { SectionHeading } from "@/components/shell/SectionHeading";
 import { cn } from "@/lib/utils";
@@ -88,7 +89,7 @@ export function ProjectSection() {
                       type="button"
                       aria-expanded={open}
                       onClick={() => setOpenId(open ? null : resource.id)}
-                      className="card-interactive flex w-full items-start gap-4 p-6"
+                      className="card-interactive flex w-full items-start gap-4 p-6 active:scale-[0.99]"
                     >
                       <span
                         className={cn(
@@ -111,7 +112,7 @@ export function ProjectSection() {
                           initial={reduce ? false : { height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={reduce ? undefined : { height: 0, opacity: 0 }}
-                          transition={{ duration: reduce ? 0 : 0.32, ease: "easeOut" }}
+                          transition={{ duration: reduce ? 0 : 0.32, ease: easeOut }}
                           className="overflow-hidden"
                         >
                           <ul className="grid gap-2 border-t border-black/10 px-6 pb-6 pt-5 sm:grid-cols-2">
